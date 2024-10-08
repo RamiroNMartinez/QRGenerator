@@ -28,11 +28,16 @@ class App(ctk.CTk):
 
         # Mostramos la primera pantalla al iniciar
         self.mostrar_pantalla(Pantalla1)
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
 
     def mostrar_pantalla(self, pantalla):
 
         frame = self.frames[pantalla]
         frame.tkraise()
+
+    def on_closing(self):
+        self.destroy()  # Cierra el ciclo de eventos de Tkinter
+        print("Aplicación cerrada correctamente.")
 
 
 # Definimos las pantallas como clases que heredan de CTkFrame
@@ -41,23 +46,23 @@ class Pantalla1(ctk.CTkFrame):
         super().__init__(parent)
 
         label1 = ctk.CTkLabel(self, text="Ingresa el link a la página:")
-        label1.pack(pady=10)
+        label1.pack(padx=50, pady=20)
 
         urlIn = ctk.CTkEntry(self, placeholder_text="Link")
-        urlIn.pack(pady=5)
+        urlIn.pack(padx=50, pady=10)
 
         label2 = ctk.CTkLabel(self, text="Ingresa el nombre de la imagen:")
-        label2.pack(pady=10)
+        label2.pack(padx=50, pady=20)
 
         titleIn = ctk.CTkEntry(self, placeholder_text="Título")
-        titleIn.pack(pady=5)
+        titleIn.pack(padx=50, pady=20)
 
         button = ctk.CTkButton(
             self,
             text="Crear QR",
             command=lambda: controller.mostrar_pantalla(Pantalla2),
         )
-        button.pack(pady=20)
+        button.pack(pady=50)
 
 
 class Pantalla2(ctk.CTkFrame):
@@ -77,7 +82,6 @@ class Pantalla2(ctk.CTkFrame):
 
 # Ejecutamos la aplicación
 app = App()
-app.grid_rowconfigure(0, weight=1)
 app.mainloop()
 
 

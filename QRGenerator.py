@@ -1,6 +1,7 @@
 import qrcode
 import qrcode.constants
-import QRGenerator.Visual as Visual
+import Visual
+
 
 def generate_qr_code(text, file_name):
     qr = qrcode.QRCode(
@@ -15,8 +16,8 @@ def generate_qr_code(text, file_name):
     img.save(file_name)
 
 
-text = Visual.url
-file_name = Visual.title+".jpg"
+text = ""
+file_name = Visual.title + ".jpg"  # ver cómo enlazar con tkinter
 
 
 generate_qr_code(text, file_name)
